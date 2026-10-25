@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+pydantic-settings
+sqlalchemy
+alembic
+psycopg2-binary
+python-multipart
+pytest
+httpx
+ruff
+black

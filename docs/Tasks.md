@@ -6,9 +6,9 @@
 
 ## Phase 0 — Project setup (Week 1)
 - [x] T0.1 [ALL] Create repo layout from `Architecture.md` §3, add `.gitignore`, `.env.example`, README.
-- [ ] T0.2 [SW] `docker-compose.yml` with postgres + backend + frontend; `/health` returns 200.
-- [ ] T0.3 [SW] Backend scaffold: FastAPI app, config via env, ruff/black/pytest wired up.
+- [x] T0.3 [SW] Backend scaffold: FastAPI app, config via env, ruff/black/pytest wired up.
 - [ ] T0.4 [SW] Frontend scaffold: Vite + React + router + design tokens from `Design.md`.
+- [ ] T0.2 [SW] `docker-compose.yml` with postgres + backend + frontend; `/health` returns 200.
 - [ ] T0.5 [CS] Engine package scaffold `sachetsewa_engine` with `types.py` (`Indicator`, `AnalysisResult`) and `pipeline.analyze(path)` stub.
 - [ ] T0.6 [ALL] CI: lint + tests on push.
 

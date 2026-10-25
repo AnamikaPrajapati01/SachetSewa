@@ -18,6 +18,7 @@
 | 2026-10-25 | Auth | JWT stored in httpOnly cookie | Mitigates XSS token theft; standard web security best practice |
 | 2026-10-25 | Repo layout | Renamed Docs/ to lowercase docs/ | Conforms to Architecture.md §3 directory structure |
 | 2026-10-25 | Docs | Replaced external report Appendix A/B references with local docs | Self-contained references: Design.md §6 (Result page) and PRD.md §9 |
+| 2026-10-25 | Phase 0 Order | Reordered execution: T0.3 -> T0.4 -> T0.2 | Docker compose (T0.2) requires backend and frontend source scaffolds to exist first |
 
 ## 2. Open questions (resolve, then move to Locked decisions)
 1. **Agency matching (25 pts):** the engine does not call DoFE. Options: (a) local seed list of publicly listed licensed agencies entered manually, (b) manual "could not verify, check DoFE" flag only when agency name/license number is missing or malformed. Which one?
@@ -42,7 +43,7 @@ _(Add entries as they occur. Examples of what belongs here.)_
 ## 5. Bugs fixed
 | Date | Area | Symptom | Root cause | Fix |
 |---|---|---|---|---|
-| | | | | |
+| 2026-10-25 | Backend | Ruff UP035/UP006 failure | Used `typing.Dict` instead of built-in `dict` in `main.py` | Replaced with `dict[str, str]` and formatted with black |
 
 ## 6. Conventions that emerged
 _(Naming, folder, API, error-format conventions agreed during build.)_
@@ -53,11 +54,12 @@ _(Naming, folder, API, error-format conventions agreed during build.)_
 
 ## 8. Current status
 - Phase: 0 (in progress)
-- Last completed task: T0.1
-- Next task: T0.2
+- Last completed task: T0.3
+- Next task: T0.4
 - Blockers: Open questions 1–3 needed before T4.5–T4.9.
 
 ## 9. Session log
 | Date | Task | What changed | Next |
 |---|---|---|---|
-| 2026-10-25 | T0.1 | Renamed Docs/->docs/; created repo scaffold with .gitkeep in leaf folders; created .gitignore, .env.example, README.md; updated PRD.md/Tasks.md appendix references; locked auth decision | T0.2 |
+| 2026-10-25 | T0.1 | Renamed Docs/->docs/; created repo scaffold with .gitkeep in leaf folders; created .gitignore, .env.example, README.md; updated PRD.md/Tasks.md appendix references; locked auth decision | T0.3 |
+| 2026-10-25 | T0.3 | Created backend scaffold (FastAPI app, /api/v1/health with CORS, Pydantic settings config, requirements.txt, pyproject.toml, health test, package __init__.py files, README virtualenv guide); verified with pytest, ruff, black | T0.4 |

@@ -41,3 +41,42 @@ For full details on project requirements, engineering standards, architecture, a
 - [docs/Design.md](docs/Design.md)
 - [docs/Tasks.md](docs/Tasks.md)
 - [docs/Memory.md](docs/Memory.md)
+
+## Backend Setup (Virtual Environment)
+
+To set up and run the backend locally:
+
+1. **Navigate to the backend directory**:
+   ```bash
+   cd backend
+   ```
+
+2. **Create a Python 3.11+ virtual environment** (do NOT commit `.venv`):
+   - On Windows:
+     ```powershell
+     py -3.13 -m venv .venv
+     .\.venv\Scripts\Activate.ps1
+     ```
+   - On Linux / macOS:
+     ```bash
+     python3 -m venv .venv
+     source .venv/bin/activate
+     ```
+
+3. **Install dependencies**:
+   ```bash
+   pip install --upgrade pip
+   pip install -r requirements.txt
+   ```
+
+4. **Run tests and linters**:
+   ```bash
+   pytest
+   ruff check .
+   ```
+
+5. **Start the development server**:
+   ```bash
+   uvicorn app.main:app --reload --port 8000
+   ```
+
