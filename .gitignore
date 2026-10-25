@@ -1,0 +1,33 @@
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Dependencies
+node_modules/
+.venv/
+venv/
+ENV/
+
+# Python cache & bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+
+# Build and distribution output
+dist/
+build/
+*.egg-info/
+
+# User uploads & private storage
+uploads/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Dataset files (exclude dataset contents except .gitkeep)
+dataset/*
+!dataset/**/.gitkeep
