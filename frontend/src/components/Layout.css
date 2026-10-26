@@ -1,0 +1,112 @@
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.layout-header {
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.layout-header-inner {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.layout-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.layout-brand:hover {
+  text-decoration: none;
+}
+
+.layout-brand-icon {
+  color: var(--color-primary);
+}
+
+.layout-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.layout-nav-link {
+  color: var(--color-ink);
+  font-weight: 500;
+  min-height: var(--touch-target-min);
+  display: inline-flex;
+  align-items: center;
+}
+
+.layout-nav-link:hover {
+  color: var(--color-primary);
+}
+
+.layout-nav-btn {
+  background-color: var(--color-primary);
+  color: var(--color-surface);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-control);
+  font-weight: 500;
+  min-height: var(--touch-target-min);
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.layout-nav-btn:hover {
+  background-color: #0c3d4a;
+  text-decoration: none;
+}
+
+.layout-main {
+  flex: 1;
+  max-width: var(--max-content-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.layout-footer {
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  padding: 1.5rem;
+  margin-top: auto;
+}
+
+.layout-footer-inner {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.layout-disclaimer {
+  color: var(--color-ink);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.layout-footnote {
+  color: var(--color-muted);
+  font-size: 0.85rem;
+}
