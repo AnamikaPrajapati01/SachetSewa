@@ -55,8 +55,8 @@ _(Naming, folder, API, error-format conventions agreed during build.)_
 
 ## 8. Current status
 - Phase: 0 (in progress)
-- Last completed task: T0.4
-- Next task: T0.2
+- Last completed task: T0.2
+- Next task: T0.5
 - Blockers: Open questions 1–3 needed before T4.5–T4.9.
 
 ## 9. Session log
@@ -65,3 +65,4 @@ _(Naming, folder, API, error-format conventions agreed during build.)_
 | 2026-10-25 | T0.1 | Renamed Docs/->docs/; created repo scaffold with .gitkeep in leaf folders; created .gitignore, .env.example, README.md; updated PRD.md/Tasks.md appendix references; locked auth decision | T0.3 |
 | 2026-10-25 | T0.3 | Created backend scaffold (FastAPI app, /api/v1/health with CORS, Pydantic settings config, requirements.txt, pyproject.toml, health test, package __init__.py files, README virtualenv guide); verified with pytest, ruff, black | T0.4 |
 | 2026-10-25 | T0.4 | Created frontend scaffold (Vite + React + TS, react-router with 6 placeholder pages, layout with DoFE disclaimer, tokens.css, api client, LandingPage Vitest test); verified with lint, test, build | T0.2 |
+| 2026-10-26 | T0.2 | Created docker-compose.yml (db, backend, frontend), backend/Dockerfile (Python 3.11-slim, tesseract, exiftool, non-root user), frontend/Dockerfile (Node 20-slim, vite dev), .dockerignore files, updated .env.example, README.md Docker section; verified compose up, /api/v1/health (200), frontend (200), and compose down | T0.5 |

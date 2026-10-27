@@ -80,3 +80,31 @@ To set up and run the backend locally:
    uvicorn app.main:app --reload --port 8000
    ```
 
+## Run with Docker
+
+To build and run all services (`db`, `backend`, and `frontend`) with Docker Compose:
+
+1. **Configure environment variables**:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. **Build and start services**:
+   ```bash
+   docker compose build
+   docker compose up -d
+   ```
+
+3. **Verify running services**:
+   ```bash
+   docker compose ps
+   ```
+   - Frontend: `http://localhost:5173`
+   - Backend API Health: `http://localhost:8000/api/v1/health`
+
+4. **Stop services**:
+   ```bash
+   docker compose down
+   ```
+
+
