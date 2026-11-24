@@ -1,0 +1,241 @@
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* Hero Section */
+.landing-hero {
+  padding: 2.5rem 0 1rem;
+}
+
+.landing-hero-content {
+  max-width: 820px;
+}
+
+.landing-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.375rem 0.875rem;
+  border-radius: 9999px;
+  margin-bottom: 1.25rem;
+}
+
+.landing-hero-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--color-ink);
+  letter-spacing: -0.025em;
+  margin-bottom: 1.25rem;
+}
+
+.landing-hero-subtitle {
+  font-size: 1.1875rem;
+  line-height: 1.6;
+  color: var(--color-muted);
+  margin-bottom: 2rem;
+  max-width: 720px;
+}
+
+.landing-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.landing-cta-link,
+.landing-secondary-link {
+  text-decoration: none;
+}
+
+/* Section Common */
+.landing-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.landing-section-header {
+  max-width: 700px;
+}
+
+.landing-section-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--color-ink);
+  margin-bottom: 0.5rem;
+}
+
+.landing-section-subtitle {
+  font-size: 1.0625rem;
+  color: var(--color-muted);
+}
+
+/* 3-Step Grid */
+.landing-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.landing-step-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: relative;
+}
+
+.landing-step-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.landing-step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.landing-step-icon {
+  color: var(--color-primary);
+}
+
+.landing-step-title {
+  font-size: 1.1875rem;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.landing-step-desc {
+  font-size: 0.9375rem;
+  color: var(--color-muted);
+  line-height: 1.55;
+}
+
+/* Scope Grid */
+.landing-scope-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.landing-scope-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.landing-scope-heading {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.landing-scope-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.landing-scope-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+
+.landing-scope-icon {
+  flex-shrink: 0;
+  margin-top: 0.1875rem;
+}
+
+.landing-scope-icon.can {
+  color: var(--color-risk-low);
+}
+
+.landing-scope-icon.cannot {
+  color: var(--color-muted);
+}
+
+/* DoFE CTA Banner */
+.landing-dofe-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.75rem 2rem;
+  background-color: var(--color-surface);
+}
+
+.landing-dofe-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  margin-bottom: 0.375rem;
+}
+
+.landing-dofe-text {
+  font-size: 0.9375rem;
+  color: var(--color-muted);
+  max-width: 600px;
+}
+
+.landing-dofe-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--color-primary);
+  color: var(--color-surface);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-control);
+  text-decoration: none;
+  white-space: nowrap;
+  min-height: var(--touch-target-min);
+  transition: background-color 0.15s ease;
+}
+
+.landing-dofe-button:hover {
+  background-color: #0c3d4a;
+  text-decoration: none;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 900px) {
+  .landing-steps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .landing-scope-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .landing-dofe-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .landing-hero-title {
+    font-size: 2rem;
+  }
+}
+

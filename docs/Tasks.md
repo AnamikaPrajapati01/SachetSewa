@@ -25,6 +25,9 @@
 - [ ] T2.5 [CS] Reach target sample count (record number in `Memory.md`), document labelling.
 
 ## Phase 3 — Backend and frontend core (Weeks 5–9)
+- [x] U1 [SW] UI foundation, Landing, About
+- [ ] U2 [SW] UI Register, Login, Upload, Analyzing
+- [ ] U3 [SW] UI Result, History, 404, states
 - [ ] T3.1 [SW] DB models + Alembic migrations (users, documents, analyses, indicators, extracted_fields).
 - [ ] T3.2 [SW] Auth: register/login/logout/me, argon2/bcrypt, JWT cookie, tests.
 - [ ] T3.3 [SW] Secure upload: extension + magic bytes + size, UUID filename, private storage, sha256, tests with bad files.

@@ -19,6 +19,7 @@
 | 2026-10-25 | Repo layout | Renamed Docs/ to lowercase docs/ | Conforms to Architecture.md §3 directory structure |
 | 2026-10-25 | Docs | Replaced external report Appendix A/B references with local docs | Self-contained references: Design.md §6 (Result page) and PRD.md §9 |
 | 2026-10-25 | Phase 0 Order | Reordered execution: T0.3 -> T0.4 -> T0.2 | Docker compose (T0.2) requires backend and frontend source scaffolds to exist first |
+| 2026-11-24 | UI Strategy | UI is built first with mock data; real API wiring happens in T3.6-T3.8 and T5.2 | Enables rapid frontend development and UX iteration before full backend API integration |
 
 ## 2. Open questions (resolve, then move to Locked decisions)
 1. **Agency matching (25 pts):** the engine does not call DoFE. Options: (a) local seed list of publicly listed licensed agencies entered manually, (b) manual "could not verify, check DoFE" flag only when agency name/license number is missing or malformed. Which one?
@@ -54,9 +55,9 @@ _(Naming, folder, API, error-format conventions agreed during build.)_
 - Local ports: frontend 5173, backend 8000, postgres 5432 (change here if they differ).
 
 ## 8. Current status
-- Phase: 0 (in progress)
-- Last completed task: T0.2
-- Next task: T0.5
+- Phase: 3 (UI foundation)
+- Last completed task: U1
+- Next task: U2
 - Blockers: Open questions 1–3 needed before T4.5–T4.9.
 
 ## 9. Session log
@@ -66,3 +67,4 @@ _(Naming, folder, API, error-format conventions agreed during build.)_
 | 2026-10-25 | T0.3 | Created backend scaffold (FastAPI app, /api/v1/health with CORS, Pydantic settings config, requirements.txt, pyproject.toml, health test, package __init__.py files, README virtualenv guide); verified with pytest, ruff, black | T0.4 |
 | 2026-10-25 | T0.4 | Created frontend scaffold (Vite + React + TS, react-router with 6 placeholder pages, layout with DoFE disclaimer, tokens.css, api client, LandingPage Vitest test); verified with lint, test, build | T0.2 |
 | 2026-10-26 | T0.2 | Created docker-compose.yml (db, backend, frontend), backend/Dockerfile (Python 3.11-slim, tesseract, exiftool, non-root user), frontend/Dockerfile (Node 20-slim, vite dev), .dockerignore files, updated .env.example, README.md Docker section; verified compose up, /api/v1/health (200), frontend (200), and compose down | T0.5 |
+| 2026-11-24 | U1 | Created frontend foundation: shared components (Button, Card, RiskBadge, Disclaimer, PageContainer, Alert), en.ts i18n dictionary, synthetic mock.ts with VITE_USE_MOCK, responsive Layout with skip link & mobile toggle, rich Landing & About pages, and Vitest suite (RiskBadge, Layout, Landing); verified lint, test, build | U2 |
