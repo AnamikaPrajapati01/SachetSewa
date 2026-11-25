@@ -1,18 +1,27 @@
 import React, { useState } from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
-import { ShieldCheck, Menu, X, ExternalLink } from "lucide-react";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { ShieldCheck, Menu, X, ExternalLink, LogOut, User as UserIcon } from "lucide-react";
 import { en } from "../i18n/en";
+import { useAuth } from "../context/AuthContext";
 import { Disclaimer } from "./Disclaimer";
 import "./Layout.css";
 
 export const Layout: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, isAuthenticated, logout } = useAuth();
 
   const closeMenu = () => setMobileMenuOpen(false);
 
   const isActive = (path: string) => {
     return location.pathname === path;
+  };
+
+  const handleLogout = () => {
+    logout();
+    closeMenu();
+    navigate("/");
   };
 
   return (
@@ -75,13 +84,31 @@ export const Layout: React.FC = () => {
             >
               {en.nav.about}
             </Link>
-            <Link
-              to="/login"
-              className={`layout-nav-link layout-nav-login ${isActive("/login") ? "active" : ""}`}
-              onClick={closeMenu}
-            >
-              {en.nav.login}
-            </Link>
+
+            {isAuthenticated ? (
+              <div className="layout-nav-user-group">
+                <span className="layout-user-pill" title={user?.email}>
+                  <UserIcon size={16} aria-hidden="true" />
+                  <span className="layout-user-email">{user?.email}</span>
+                </span>
+                <button
+                  type="button"
+                  className="layout-nav-link layout-nav-logout-btn"
+                  onClick={handleLogout}
+                >
+                  <LogOut size={16} aria-hidden="true" />
+                  <span>{en.nav.logout}</span>
+                </button>
+              </div>
+            ) : (
+              <Link
+                to="/login"
+                className={`layout-nav-link layout-nav-login ${isActive("/login") ? "active" : ""}`}
+                onClick={closeMenu}
+              >
+                {en.nav.login}
+              </Link>
+            )}
           </nav>
         </div>
       </header>

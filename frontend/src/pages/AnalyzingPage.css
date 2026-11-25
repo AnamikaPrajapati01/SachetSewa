@@ -1,0 +1,148 @@
+.analyzing-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1.5rem;
+  min-height: calc(100vh - 220px);
+}
+
+.analyzing-card {
+  max-width: 560px;
+  width: 100%;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.analyzing-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.analyzing-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--color-ink);
+  letter-spacing: -0.02em;
+}
+
+.analyzing-subtitle {
+  font-size: 0.95rem;
+  color: var(--color-muted);
+}
+
+/* Step list */
+.analyzing-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.analyzing-step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.analyzing-step-icon-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.analyzing-step-connector {
+  position: absolute;
+  top: 28px;
+  width: 2px;
+  height: 28px;
+  background-color: var(--color-border);
+}
+
+.analyzing-icon-done {
+  color: var(--color-risk-low);
+  background-color: var(--color-surface);
+  z-index: 1;
+}
+
+.analyzing-icon-spinner {
+  color: var(--color-primary);
+  animation: spin 1s linear infinite;
+  background-color: var(--color-surface);
+  z-index: 1;
+}
+
+.analyzing-icon-waiting {
+  color: var(--color-border);
+  background-color: var(--color-surface);
+  z-index: 1;
+}
+
+.analyzing-step-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.analyzing-step-text {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.analyzing-step-waiting .analyzing-step-text {
+  color: var(--color-muted);
+  font-weight: 500;
+}
+
+.analyzing-step-badge {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.analyzing-step-in_progress .analyzing-step-badge {
+  color: var(--color-primary);
+}
+
+.analyzing-step-done .analyzing-step-badge {
+  color: var(--color-risk-low);
+}
+
+/* Failure container */
+.analyzing-failure-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.analyzing-failure-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Accessible screen-reader only class */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+

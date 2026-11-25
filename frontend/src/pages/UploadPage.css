@@ -1,0 +1,242 @@
+.upload-page-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem 1.5rem 3rem;
+}
+
+.upload-header {
+  max-width: 720px;
+}
+
+.upload-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-ink);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.upload-subtitle {
+  font-size: 1.0625rem;
+  color: var(--color-muted);
+}
+
+.upload-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 2rem;
+  align-items: start;
+}
+
+.upload-card {
+  padding: 2rem;
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.upload-hidden-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* Dropzone */
+.upload-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 3.5rem 2rem;
+  background-color: var(--color-background);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-card);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.upload-dropzone:hover,
+.upload-dropzone.dragging {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-light);
+}
+
+.upload-dropzone:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.upload-dropzone-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 0.5rem;
+}
+
+.upload-dropzone-prompt {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.upload-dropzone-hint {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}
+
+/* Selected File Display */
+.upload-file-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem;
+  background-color: var(--color-primary-light);
+  border: 1px solid rgba(15, 76, 92, 0.2);
+  border-radius: var(--radius-card);
+}
+
+.upload-file-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.upload-file-icon {
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.upload-file-details {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.upload-file-name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.upload-file-size {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}
+
+.upload-file-remove-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--color-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  min-height: var(--touch-target-min);
+  min-width: var(--touch-target-min);
+  border-radius: var(--radius-control);
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.upload-file-remove-btn:hover {
+  color: var(--color-risk-high);
+  background-color: var(--color-risk-high-bg);
+}
+
+/* Privacy Pill */
+.upload-privacy-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.upload-privacy-icon {
+  color: var(--color-primary);
+}
+
+.upload-alert {
+  margin: 0;
+}
+
+.upload-alert-text {
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+/* Tips Sidebar */
+.upload-tips-card {
+  background-color: var(--color-surface);
+  border-left: 4px solid var(--color-primary);
+}
+
+.upload-tips-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.upload-tips-icon {
+  color: var(--color-primary);
+}
+
+.upload-tips-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.upload-tips-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.upload-tips-item {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--color-muted);
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+.upload-tips-item::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .upload-layout-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

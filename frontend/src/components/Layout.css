@@ -122,6 +122,44 @@
   color: var(--color-primary);
 }
 
+.layout-nav-user-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.layout-user-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  background-color: var(--color-background);
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  border: 1px solid var(--color-border);
+  max-width: 160px;
+}
+
+.layout-user-email {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.layout-nav-logout-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--color-muted);
+  gap: 0.375rem;
+}
+
+.layout-nav-logout-btn:hover {
+  color: var(--color-risk-high);
+  background-color: var(--color-risk-high-bg);
+}
+
 /* Main Area */
 .layout-main {
   flex: 1;

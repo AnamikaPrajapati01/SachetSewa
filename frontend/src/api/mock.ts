@@ -27,6 +27,9 @@ export interface MockAnalysisResult {
   disclaimer: string;
 }
 
+// In-memory synthetic documents store
+const analysisResultsStore = new Map<string, MockAnalysisResult>();
+
 const SYNTHETIC_HISTORY: MockAnalysisResult[] = [
   {
     id: "doc-demo-001",
@@ -110,77 +113,134 @@ const SYNTHETIC_HISTORY: MockAnalysisResult[] = [
   },
 ];
 
+// Initialize store with synthetic history
+SYNTHETIC_HISTORY.forEach((item) => analysisResultsStore.set(item.id, item));
+
 export const isMockEnabled = (): boolean => {
   return import.meta.env.VITE_USE_MOCK === "true";
 };
 
-export async function mockAnalyzeDocument(
-  file: File
-): Promise<MockAnalysisResult> {
-  // Simulate network latency (400ms)
-  await new Promise((resolve) => setTimeout(resolve, 400));
+/**
+ * Creates a synthetic analysis job for an uploaded document file.
+ * Returns the generated document/analysis ID.
+ */
+export async function mockUploadDocument(file: File): Promise<{ documentId: string }> {
+  await new Promise((resolve) => setTimeout(resolve, 300));
 
-  const filename = file.name || "Uploaded_Sample_Document.pdf";
+  const documentId = `doc-${Date.now()}`;
+  const filename = file.name || "Uploaded_Document.pdf";
 
-  // Provide a synthetic high-risk result if filename contains 'high' or 'warn', otherwise moderate or low
-  return {
-    id: `doc-${Date.now()}`,
+  const result: MockAnalysisResult = {
+    id: documentId,
     filename,
-    score: 65,
-    level: "high",
+    score: filename.toLowerCase().includes("clean") ? 15 : 70,
+    level: filename.toLowerCase().includes("clean") ? "low" : "high",
     engineVersion: "0.1.0-mock",
     createdAt: new Date().toISOString(),
-    summary: "We found 3 warning signs in this document.",
-    nextSteps:
-      "Do not pay money or share more personal information until you verify this offer through official channels.",
+    summary: filename.toLowerCase().includes("clean")
+      ? "Few warning signs found in this document."
+      : "We found 4 warning signs in this document.",
+    nextSteps: filename.toLowerCase().includes("clean")
+      ? "Few warning signs found. Still verify with DoFE before committing."
+      : "Do not pay money or share more personal information until you verify this offer through official channels.",
     disclaimer:
       "SachetSewa is a screening tool, not an official verification. This result is not proof that an offer is genuine or fraudulent.",
-    indicators: [
-      {
-        id: "mock-ind-1",
-        code: "AGENCY_UNMATCHED",
-        title: "Agency info cannot be matched with official records",
-        weight: 25,
-        severity: "high",
-        explanation:
-          "The agency stated on the header could not be verified in official registry archives.",
-        evidence: "Name: Sunrise Overseas Agency (Synthetic Test)",
-      },
-      {
-        id: "mock-ind-2",
-        code: "HIGH_RECRUITMENT_FEE",
-        title: "Suspicious or unusually high recruitment fee",
-        weight: 20,
-        severity: "high",
-        explanation:
-          "The offer letter includes an upfront service charge exceeding standard limits.",
-        evidence: "Service fee: NPR 220,000",
-      },
-      {
-        id: "mock-ind-3",
-        code: "JOB_INCONSISTENCY",
-        title: "Inconsistency in job and employer information",
-        weight: 20,
-        severity: "medium",
-        explanation:
-          "The stated job title conflicts with the job description duties listed in section 3.",
-        evidence: "Title: Warehouse Assistant vs Duties: Commercial Driver",
-      },
-    ],
+    indicators: filename.toLowerCase().includes("clean")
+      ? [
+          {
+            id: `ind-${Date.now()}-1`,
+            code: "SALARY_BENCHMARK",
+            title: "Salary slightly above benchmark",
+            weight: 5,
+            severity: "low",
+            explanation: "Stated remuneration is marginally higher than typical role average.",
+            evidence: "Sample baseline comparison",
+          },
+        ]
+      : [
+          {
+            id: `ind-${Date.now()}-1`,
+            code: "AGENCY_UNMATCHED",
+            title: "Agency info cannot be matched with official records",
+            weight: 25,
+            severity: "high",
+            explanation:
+              "The recruiting agency stated on the letterhead could not be identified in licensed registries.",
+            evidence: "License Number: Not verified in official directory",
+          },
+          {
+            id: `ind-${Date.now()}-2`,
+            code: "HIGH_RECRUITMENT_FEE",
+            title: "Suspicious or unusually high recruitment fee",
+            weight: 20,
+            severity: "high",
+            explanation: "The document specifies advance recruitment charges prior to interview verification.",
+            evidence: "Amount stated: NPR 280,000",
+          },
+          {
+            id: `ind-${Date.now()}-3`,
+            code: "DOC_TAMPERING",
+            title: "Signs of document modification",
+            weight: 20,
+            severity: "high",
+            explanation: "Document was edited with desktop graphics software after initial creation.",
+            evidence: "Producer software tag modified",
+          },
+          {
+            id: `ind-${Date.now()}-4`,
+            code: "SUSPICIOUS_CONTACT",
+            title: "Suspicious contact information",
+            weight: 10,
+            severity: "medium",
+            explanation: "Recruiter lists messaging app phone numbers rather than registered landlines.",
+            evidence: "Contact: +977-9800000000 (Sample unverified chat line)",
+          },
+        ],
   };
+
+  analysisResultsStore.set(documentId, result);
+  return { documentId };
+}
+
+/**
+ * Checks whether an analysis should simulate failure.
+ * When document ID or filename contains 'fail', triggers a simulated error.
+ */
+export async function mockPerformAnalysisStep(
+  documentId: string,
+  stepNumber: number
+): Promise<{ success: boolean; error?: string }> {
+  // Step simulated delay
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
+  const result = analysisResultsStore.get(documentId);
+  const name = result?.filename.toLowerCase() || "";
+
+  // Trigger error state if document ID or filename includes 'fail' on step 2 or 3
+  if ((documentId.includes("fail") || name.includes("fail")) && stepNumber >= 2) {
+    return {
+      success: false,
+      error: "The document could not be analyzed due to an unreadable file format.",
+    };
+  }
+
+  return { success: true };
+}
+
+export async function mockGetAnalysisResult(
+  documentId: string
+): Promise<MockAnalysisResult | null> {
+  await new Promise((resolve) => setTimeout(resolve, 200));
+  return analysisResultsStore.get(documentId) || null;
 }
 
 export async function mockGetHistory(): Promise<MockAnalysisResult[]> {
   await new Promise((resolve) => setTimeout(resolve, 200));
-  return [...SYNTHETIC_HISTORY];
+  return Array.from(analysisResultsStore.values());
 }
 
 export async function mockDeleteDocument(id: string): Promise<{ success: boolean }> {
   await new Promise((resolve) => setTimeout(resolve, 200));
-  const idx = SYNTHETIC_HISTORY.findIndex((item) => item.id === id);
-  if (idx !== -1) {
-    SYNTHETIC_HISTORY.splice(idx, 1);
-  }
+  analysisResultsStore.delete(id);
   return { success: true };
 }
-

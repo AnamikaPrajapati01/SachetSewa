@@ -56,8 +56,8 @@ _(Naming, folder, API, error-format conventions agreed during build.)_
 
 ## 8. Current status
 - Phase: 3 (UI foundation)
-- Last completed task: U1
-- Next task: U2
+- Last completed task: U2
+- Next task: U3
 - Blockers: Open questions 1–3 needed before T4.5–T4.9.
 
 ## 9. Session log
@@ -68,3 +68,4 @@ _(Naming, folder, API, error-format conventions agreed during build.)_
 | 2026-10-25 | T0.4 | Created frontend scaffold (Vite + React + TS, react-router with 6 placeholder pages, layout with DoFE disclaimer, tokens.css, api client, LandingPage Vitest test); verified with lint, test, build | T0.2 |
 | 2026-10-26 | T0.2 | Created docker-compose.yml (db, backend, frontend), backend/Dockerfile (Python 3.11-slim, tesseract, exiftool, non-root user), frontend/Dockerfile (Node 20-slim, vite dev), .dockerignore files, updated .env.example, README.md Docker section; verified compose up, /api/v1/health (200), frontend (200), and compose down | T0.5 |
 | 2026-11-24 | U1 | Created frontend foundation: shared components (Button, Card, RiskBadge, Disclaimer, PageContainer, Alert), en.ts i18n dictionary, synthetic mock.ts with VITE_USE_MOCK, responsive Layout with skip link & mobile toggle, rich Landing & About pages, and Vitest suite (RiskBadge, Layout, Landing); verified lint, test, build | U2 |
+| 2026-11-24 | U2 | Built Register, Login, Upload, and Analyzing screens with mock API (AuthContext in-memory only, ProtectedRoute with project-relevant in-page auth prompt for upload/history, client validation, 4-step analysis progress with aria-live and retry, Vitest suite covering validation and route protection); verified lint, test, build | U3 |

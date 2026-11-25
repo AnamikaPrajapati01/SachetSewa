@@ -26,7 +26,7 @@
 
 ## Phase 3 — Backend and frontend core (Weeks 5–9)
 - [x] U1 [SW] UI foundation, Landing, About
-- [ ] U2 [SW] UI Register, Login, Upload, Analyzing
+- [x] U2 [SW] UI Register, Login, Upload, Analyzing
 - [ ] U3 [SW] UI Result, History, 404, states
 - [ ] T3.1 [SW] DB models + Alembic migrations (users, documents, analyses, indicators, extracted_fields).
 - [ ] T3.2 [SW] Auth: register/login/logout/me, argon2/bcrypt, JWT cookie, tests.

@@ -1,14 +1,17 @@
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { describe, it, expect } from "vitest";
+import { AuthProvider } from "../context/AuthContext";
 import { Layout } from "./Layout";
 
 describe("Layout", () => {
   it("renders brand wordmark, skip link, and navigation links", () => {
     render(
-      <BrowserRouter>
-        <Layout />
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Layout />
+        </BrowserRouter>
+      </AuthProvider>
     );
 
     // Skip to content link
@@ -36,4 +39,3 @@ describe("Layout", () => {
     ).toBeInTheDocument();
   });
 });
-

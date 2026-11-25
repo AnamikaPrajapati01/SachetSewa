@@ -1,0 +1,7 @@
+/* LoginPage uses shared styles with RegisterPage */
+@import "./RegisterPage.css";
+
+.auth-alert {
+  margin: 0;
+}
+
