@@ -1,0 +1,53 @@
+.error-boundary-container {
+  max-width: 520px;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.error-boundary-card {
+  text-align: center;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.error-icon-wrap {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: var(--color-risk-high-bg);
+  color: var(--color-risk-high);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  margin: 0;
+}
+
+.error-message {
+  font-size: 1rem;
+  color: var(--color-muted);
+  line-height: 1.5;
+  margin: 0 0 1rem;
+}
+
+.error-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.error-home-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}

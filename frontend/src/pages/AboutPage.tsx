@@ -161,8 +161,6 @@ export const AboutPage: React.FC = () => {
         </Card>
       </section>
 
-      {/* Disclaimer */}
-      <Disclaimer />
     </PageContainer>
   );
 };

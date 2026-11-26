@@ -157,7 +157,7 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* Mandatory Disclaimer */}
-      <Disclaimer />
+      {/* <Disclaimer /> */}
     </PageContainer>
   );
 };

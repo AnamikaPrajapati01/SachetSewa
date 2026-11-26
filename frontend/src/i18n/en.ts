@@ -128,6 +128,62 @@ export const en = {
     unknown: "Unknown",
   },
 
+  result: {
+    title: "Screening Result",
+    subtitle: "Screening report for uploaded document",
+    lowConfidenceNotice: "We could not read part of this document, so results may be incomplete.",
+    whyThisMattersTitle: "Why this matters",
+    technicalDetailsSummary: "Technical details",
+    verifyDofeButton: "Verify with DoFE",
+    verifyDofeHint: "Opens the official Department of Foreign Employment website in a new tab",
+    checkAnotherButton: "Check another document",
+    deleteButton: "Delete this document",
+    deleteConfirmTitle: "Delete this document?",
+    deleteConfirmMessage:
+      "Are you sure you want to delete this document and its screening results? This action cannot be undone.",
+    deleteConfirmAction: "Yes, delete document",
+    deleteCancelAction: "Cancel",
+    deleting: "Deleting...",
+    notFoundTitle: "Screening result not found",
+    notFoundMessage: "The requested screening report could not be found or may have been deleted.",
+    backToHistoryButton: "Back to history",
+    loading: "Loading screening result...",
+  },
+
+  history: {
+    title: "Document History",
+    subtitle: "Review your previous foreign-employment document screenings.",
+    emptyTitle: "You have not checked any documents yet.",
+    emptySubtitle: "Upload an offer letter or contract to screen for warning signs before committing.",
+    emptyCta: "Check a document",
+    dateColumn: "Date",
+    documentColumn: "Document",
+    riskColumn: "Risk level",
+    actionsColumn: "Actions",
+    openButton: "Open result",
+    deleteButton: "Delete",
+    deleteConfirmTitle: "Delete document history",
+    deleteConfirmMessage:
+      "Are you sure you want to remove this document from your history? This action cannot be undone.",
+    deleteConfirmAction: "Yes, delete",
+    deleteCancelAction: "Cancel",
+    deleting: "Deleting...",
+    loading: "Loading document history...",
+  },
+
+  notFound: {
+    title: "Page Not Found",
+    message: "The page you are looking for does not exist or has been moved.",
+    homeButton: "Go to Homepage",
+  },
+
+  errorBoundary: {
+    title: "Something went wrong",
+    message: "An unexpected error occurred while loading this page.",
+    retryButton: "Reload page",
+    homeButton: "Return to Homepage",
+  },
+
   landing: {
     hero: {
       title: "Screen your foreign-employment offer before paying or committing.",
@@ -173,7 +229,7 @@ export const en = {
       cannotItems: [
         "Cannot confirm whether an offer letter is legally authorized or officially approved",
         "Cannot replace official verification by the Department of Foreign Employment (DoFE)",
-        "Never declares a document definitively authentic or fraudulent",
+        "Never issues a legal ruling or official verdict on any document",
         "Cannot provide legal representation or recover money already paid",
       ],
     },
@@ -251,7 +307,7 @@ export const en = {
       high: {
         title: "High Risk (61–100 points)",
         advice:
-          "Significant warning signs were detected. Do not pay money or share personal documents until you have verified this offer through official channels.",
+          "Significant warning signs were detected. Do not pay money or share personal documents until you verify this offer through official channels.",
       },
     },
 

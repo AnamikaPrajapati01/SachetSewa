@@ -11,7 +11,9 @@ export interface MockIndicator {
   weight: number;
   severity: "low" | "medium" | "high";
   explanation: string;
-  evidence: string;
+  whyThisMatters: string;
+  technicalDetails?: string;
+  evidence?: string;
 }
 
 export interface MockAnalysisResult {
@@ -21,24 +23,25 @@ export interface MockAnalysisResult {
   level: "low" | "medium" | "high";
   engineVersion: string;
   createdAt: string;
-  indicators: MockIndicator[];
   summary: string;
   nextSteps: string;
   disclaimer: string;
+  indicators: MockIndicator[];
+  warnings?: string[];
 }
 
 // In-memory synthetic documents store
 const analysisResultsStore = new Map<string, MockAnalysisResult>();
 
-const SYNTHETIC_HISTORY: MockAnalysisResult[] = [
-  {
-    id: "doc-demo-001",
+export const SYNTHETIC_RESULTS: Record<string, MockAnalysisResult> = {
+  high: {
+    id: "doc-high-001",
     filename: "Sample_Hospitality_Offer_2026.pdf",
-    score: 75,
+    score: 78,
     level: "high",
     engineVersion: "0.1.0-mock",
     createdAt: "2026-11-20T10:15:00Z",
-    summary: "We found 4 warning signs in this document.",
+    summary: "We found 5 warning signs in this document.",
     nextSteps:
       "Do not pay money or share more personal information until you verify this offer through official channels.",
     disclaimer:
@@ -46,75 +49,193 @@ const SYNTHETIC_HISTORY: MockAnalysisResult[] = [
     indicators: [
       {
         id: "ind-1",
+        code: "HIGH_RECRUITMENT_FEE",
+        title: "Recruitment fee appears unusually high",
+        weight: 20,
+        severity: "high",
+        explanation:
+          "The document requests an advance fee of NPR 350,000 before visa processing.",
+        whyThisMatters:
+          "Unusually high recruitment charges increase financial vulnerability and violate standard labor guidelines.",
+        technicalDetails:
+          "Extracted fee: NPR 350,000. Destination benchmark ceiling: NPR 10,000.",
+      },
+      {
+        id: "ind-2",
+        code: "EMPLOYER_INCONSISTENT",
+        title: "Employer information is inconsistent within the document",
+        weight: 20,
+        severity: "high",
+        explanation:
+          "The letterhead names 'Al-Bahar Facility Services' while the signature block cites 'Gulf Star Holdings LLC'.",
+        whyThisMatters:
+          "Mismatched company names make legal accountability difficult in the event of employment disputes.",
+        technicalDetails:
+          "Conflicting employer entity strings detected across header and footer blocks.",
+      },
+      {
+        id: "ind-3",
+        code: "DOC_TAMPERING",
+        title: "Document shows signs of being edited after it was created",
+        weight: 20,
+        severity: "high",
+        explanation:
+          "File structure and metadata indicate graphic editing tools were used to alter content after initial creation.",
+        whyThisMatters:
+          "Subsequent alterations often conceal modified wages, job titles, or unauthorized recruiter stamps.",
+        technicalDetails:
+          "Incremental updates and consumer image manipulation tool headers identified.",
+      },
+      {
+        id: "ind-4",
+        code: "SUSPICIOUS_CONTACT",
+        title: "Contact information needs checking",
+        weight: 10,
+        severity: "medium",
+        explanation:
+          "The document lists a free webmail address and mobile chat handles rather than an official corporate domain.",
+        whyThisMatters:
+          "Legitimate recruiters typically communicate via registered corporate email and official landline numbers.",
+        technicalDetails:
+          "Free public webmail provider detected in official contact field.",
+      },
+      {
+        id: "ind-5",
+        code: "UNUSUAL_SALARY",
+        title: "Salary looks unusual for the stated job",
+        weight: 5,
+        severity: "low",
+        explanation:
+          "The compensation figure of USD 4,500/month is significantly above standard market ranges for entry-level hospitality staff.",
+        whyThisMatters:
+          "Unrealistically high salaries are frequently advertised to entice applicants into paying advance placement fees.",
+        technicalDetails:
+          "Stated remuneration exceeds destination country median baseline by 320%.",
+      },
+    ],
+  },
+
+  medium: {
+    id: "doc-medium-002",
+    filename: "Maintenance_Contract_Sample.pdf",
+    score: 45,
+    level: "medium",
+    engineVersion: "0.1.0-mock",
+    createdAt: "2026-11-21T11:20:00Z",
+    summary: "We found 2 warning signs in this document.",
+    nextSteps:
+      "Check the concerns below and verify with DoFE before paying or committing.",
+    disclaimer:
+      "SachetSewa is a screening tool, not an official verification. This result is not proof that an offer is genuine or fraudulent.",
+    indicators: [
+      {
+        id: "ind-m1",
         code: "AGENCY_UNMATCHED",
         title: "Agency info cannot be matched with official records",
         weight: 25,
         severity: "high",
         explanation:
-          "The agency name 'Apex Global Manpower Demo' could not be found in active registered agency records.",
-        evidence: "Agency License: Unregistered (synthetic sample)",
+          "The recruiting agency stated on the letterhead could not be identified in licensed registries.",
+        whyThisMatters:
+          "Recruitment agencies must hold an active government license to legally recruit and deploy personnel.",
+        technicalDetails:
+          "Agency license registry search returned zero matches for stated identifier.",
       },
       {
-        id: "ind-2",
+        id: "ind-m2",
         code: "HIGH_RECRUITMENT_FEE",
-        title: "Suspicious or unusually high recruitment fee",
+        title: "Recruitment fee appears unusually high",
         weight: 20,
-        severity: "high",
-        explanation:
-          "The document requests an advance fee of NPR 350,000 before visa processing.",
-        evidence: "Advance processing fee mentioned: NPR 350,000",
-      },
-      {
-        id: "ind-3",
-        code: "DOC_TAMPERING",
-        title: "Strong document-tampering indicator",
-        weight: 20,
-        severity: "high",
-        explanation:
-          "The file metadata shows graphic editing software was used after initial creation.",
-        evidence: "Modified with consumer photo-editing software.",
-      },
-      {
-        id: "ind-4",
-        code: "SUSPICIOUS_CONTACT",
-        title: "Suspicious contact information",
-        weight: 10,
         severity: "medium",
         explanation:
-          "Official contact lists only a free personal email address and an unverified chat handle.",
-        evidence: "Contact: contact-temp-demo@webmail.sample",
+          "The contract references a mandatory advance documentation fee of NPR 120,000.",
+        whyThisMatters:
+          "Excessive documentation and placement fees place unnecessary debt burdens on workers.",
+        technicalDetails:
+          "Extracted processing charge exceeds approved country schedule limits.",
       },
     ],
   },
-  {
-    id: "doc-demo-002",
+
+  low: {
+    id: "doc-low-003",
     filename: "Standard_Security_Contract_Sample.pdf",
-    score: 15,
+    score: 12,
     level: "low",
     engineVersion: "0.1.0-mock",
     createdAt: "2026-11-22T14:30:00Z",
-    summary: "Few warning signs found in this document.",
+    summary: "We found 1 warning sign in this document.",
     nextSteps:
-      "Few warning signs found. Still verify with DoFE before committing or paying.",
+      "Few warning signs found. Still verify with DoFE before committing.",
     disclaimer:
       "SachetSewa is a screening tool, not an official verification. This result is not proof that an offer is genuine or fraudulent.",
     indicators: [
       {
-        id: "ind-5",
+        id: "ind-l1",
         code: "UNUSUAL_SALARY",
-        title: "Unusual or inconsistent salary benchmark",
+        title: "Salary looks unusual for the stated job",
         weight: 5,
         severity: "low",
         explanation:
-          "The base salary is slightly higher than destination market averages for general security staff.",
-        evidence: "Stated salary: AED 3,200/month",
+          "The offered salary is slightly above standard market averages for general security personnel in this region.",
+        whyThisMatters:
+          "Review employment terms with official channels to ensure overtime and housing allowances are accurately represented.",
+        technicalDetails:
+          "Remuneration is approximately 15% above destination market baseline.",
       },
     ],
   },
-];
 
-// Initialize store with synthetic history
-SYNTHETIC_HISTORY.forEach((item) => analysisResultsStore.set(item.id, item));
+  lowConfidence: {
+    id: "doc-warning-004",
+    filename: "Scanned_Mobile_Photo_Contract.jpg",
+    score: 45,
+    level: "medium",
+    engineVersion: "0.1.0-mock",
+    createdAt: "2026-11-23T09:00:00Z",
+    warnings: [
+      "We could not read part of this document, so results may be incomplete.",
+    ],
+    summary: "We found 2 warning signs in this document.",
+    nextSteps:
+      "Check the concerns below and verify with DoFE before paying or committing.",
+    disclaimer:
+      "SachetSewa is a screening tool, not an official verification. This result is not proof that an offer is genuine or fraudulent.",
+    indicators: [
+      {
+        id: "ind-w1",
+        code: "AGENCY_UNMATCHED",
+        title: "Agency info cannot be matched with official records",
+        weight: 25,
+        severity: "high",
+        explanation:
+          "The recruiting agency stated on the letterhead could not be identified in licensed registries.",
+        whyThisMatters:
+          "Recruitment agencies must hold an active government license to legally recruit and deploy personnel.",
+        technicalDetails:
+          "Document license number text partially unreadable due to image blur.",
+      },
+      {
+        id: "ind-w2",
+        code: "HIGH_RECRUITMENT_FEE",
+        title: "Recruitment fee appears unusually high",
+        weight: 20,
+        severity: "medium",
+        explanation:
+          "The document references an advance payment request of NPR 140,000.",
+        whyThisMatters:
+          "High processing charges violate transparent recruitment regulations.",
+        technicalDetails:
+          "Extracted fee value identified in payment section.",
+      },
+    ],
+  },
+};
+
+// Seed store with synthetic results
+Object.values(SYNTHETIC_RESULTS).forEach((result) => {
+  analysisResultsStore.set(result.id, result);
+});
 
 export const isMockEnabled = (): boolean => {
   return import.meta.env.VITE_USE_MOCK === "true";
@@ -130,72 +251,24 @@ export async function mockUploadDocument(file: File): Promise<{ documentId: stri
   const documentId = `doc-${Date.now()}`;
   const filename = file.name || "Uploaded_Document.pdf";
 
+  // Also link synthetic demo IDs for convenience
+  if (filename.toLowerCase().includes("clean") || filename.toLowerCase().includes("low")) {
+    const lowResult = SYNTHETIC_RESULTS.low;
+    analysisResultsStore.set(documentId, { ...lowResult, id: documentId, filename });
+    return { documentId };
+  } else if (filename.toLowerCase().includes("medium")) {
+    const medResult = SYNTHETIC_RESULTS.medium;
+    analysisResultsStore.set(documentId, { ...medResult, id: documentId, filename });
+    return { documentId };
+  }
+
+  // Default to high risk synthetic result
+  const highResult = SYNTHETIC_RESULTS.high;
   const result: MockAnalysisResult = {
+    ...highResult,
     id: documentId,
     filename,
-    score: filename.toLowerCase().includes("clean") ? 15 : 70,
-    level: filename.toLowerCase().includes("clean") ? "low" : "high",
-    engineVersion: "0.1.0-mock",
     createdAt: new Date().toISOString(),
-    summary: filename.toLowerCase().includes("clean")
-      ? "Few warning signs found in this document."
-      : "We found 4 warning signs in this document.",
-    nextSteps: filename.toLowerCase().includes("clean")
-      ? "Few warning signs found. Still verify with DoFE before committing."
-      : "Do not pay money or share more personal information until you verify this offer through official channels.",
-    disclaimer:
-      "SachetSewa is a screening tool, not an official verification. This result is not proof that an offer is genuine or fraudulent.",
-    indicators: filename.toLowerCase().includes("clean")
-      ? [
-          {
-            id: `ind-${Date.now()}-1`,
-            code: "SALARY_BENCHMARK",
-            title: "Salary slightly above benchmark",
-            weight: 5,
-            severity: "low",
-            explanation: "Stated remuneration is marginally higher than typical role average.",
-            evidence: "Sample baseline comparison",
-          },
-        ]
-      : [
-          {
-            id: `ind-${Date.now()}-1`,
-            code: "AGENCY_UNMATCHED",
-            title: "Agency info cannot be matched with official records",
-            weight: 25,
-            severity: "high",
-            explanation:
-              "The recruiting agency stated on the letterhead could not be identified in licensed registries.",
-            evidence: "License Number: Not verified in official directory",
-          },
-          {
-            id: `ind-${Date.now()}-2`,
-            code: "HIGH_RECRUITMENT_FEE",
-            title: "Suspicious or unusually high recruitment fee",
-            weight: 20,
-            severity: "high",
-            explanation: "The document specifies advance recruitment charges prior to interview verification.",
-            evidence: "Amount stated: NPR 280,000",
-          },
-          {
-            id: `ind-${Date.now()}-3`,
-            code: "DOC_TAMPERING",
-            title: "Signs of document modification",
-            weight: 20,
-            severity: "high",
-            explanation: "Document was edited with desktop graphics software after initial creation.",
-            evidence: "Producer software tag modified",
-          },
-          {
-            id: `ind-${Date.now()}-4`,
-            code: "SUSPICIOUS_CONTACT",
-            title: "Suspicious contact information",
-            weight: 10,
-            severity: "medium",
-            explanation: "Recruiter lists messaging app phone numbers rather than registered landlines.",
-            evidence: "Contact: +977-9800000000 (Sample unverified chat line)",
-          },
-        ],
   };
 
   analysisResultsStore.set(documentId, result);
